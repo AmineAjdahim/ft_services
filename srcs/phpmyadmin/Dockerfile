@@ -15,6 +15,9 @@ COPY config.inc.php /var/www/phpmyadmin
 RUN mkdir -p /var/www/phpmyadmin/tmp/
 RUN chmod 777 /var/www/phpmyadmin/tmp/
 COPY runginx.sh /
+RUN apk add telegraf --no-cache --repository http://dl-2.alpinelinux.org/alpine/edge/community
 
+RUN mkdir -p /etc/telegraf
+COPY telegraf.conf /etc/telegraf/telegraf.conf
 RUN chmod -x runginx.sh
 CMD [ "sh", "runginx.sh" ]
