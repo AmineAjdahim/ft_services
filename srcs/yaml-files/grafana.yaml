@@ -1,7 +1,7 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: grafana-service
+  name: grafana
   annotations:
     metallb.universe.tf/allow-shared-ip: shared
 spec:
@@ -15,20 +15,27 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: grafana-deployment
+  name: grafana
 spec:
-  replicas: 1
+  selector:
+    matchLabels:
+      app: grafana
   template:
     metadata:
       labels:
         app: grafana
     spec:
       containers:
-        - name: grafana
-          image: d_grafana1
-          imagePullPolicy: Never
-          ports:
-            - containerPort: 3000
-  selector:
-    matchLabels:
-      app: grafana
+      - name: grafana
+        image: d_grafana1
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 3000
+          name: graf-port
+        livenessProbe:
+          exec:
+            command:
+            - sh
+            - healthy.sh
+          initialDelaySeconds: 10
+          periodSeconds: 5

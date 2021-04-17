@@ -15,5 +15,6 @@ RUN mv wordpress/ var/www/
 COPY wp-config.php /var/www/wordpress/
 COPY wordpress.sql /
 COPY runginx.sh /
+COPY healthy.sh /
 RUN chmod -x runginx.sh
 ENTRYPOINT [ "sh", "runginx.sh" ]

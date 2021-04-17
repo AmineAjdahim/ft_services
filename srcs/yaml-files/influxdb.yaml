@@ -44,6 +44,13 @@ spec:
       containers:
       - imagePullPolicy: Never
         image: d_influxdb
+        livenessProbe:
+          exec:
+            command:
+            - sh
+            - healthy.sh
+          initialDelaySeconds: 20
+          periodSeconds: 5
         name: influxdb
         ports:
         - containerPort: 8086

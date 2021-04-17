@@ -7,6 +7,7 @@ RUN echo "<h1>Hello Amine top!</h1>" > /var/www/localhost/htdocs/index.html
 COPY nginx-selfsigned.crt etc/ssl/certs/
 COPY nginx-selfsigned.key /etc/ssl/private/
 COPY init_nginx.sh /
+COPY healthy.sh /
 
 RUN adduser -D hdm
 RUN echo "hdm:password"|chpasswd

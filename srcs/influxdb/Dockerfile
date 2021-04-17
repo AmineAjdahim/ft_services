@@ -8,6 +8,7 @@ RUN mkdir -p /etc/telegraf
 COPY telegraf.conf /etc/telegraf/telegraf.conf
 COPY start.sh /
 RUN chmod -x start.sh
+COPY healthy.sh /
 # VOLUME [ "/var/run/docker.sock" ]
 CMD ["sh", "start.sh"]
 EXPOSE 8086

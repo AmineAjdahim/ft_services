@@ -54,6 +54,13 @@ spec:
       containers:
       - imagePullPolicy: Never
         image: d_mysql
+        livenessProbe:
+          exec:
+            command:
+            - sh
+            - healthy.sh
+          initialDelaySeconds: 20
+          periodSeconds: 5
         name: mysql
         env:
           # Use secret in real usage
